@@ -1,0 +1,25 @@
+1  Set Up Flask: First, install Flask if you haven't already (pip install Flask). Then, create a Python file for your web application.
+2 HTML Form: Create an HTML form where users can enter their Name, Gender, and Blood Group.
+3 Backend Processing: Write Python code to process the form submission, use the provided healthcare data to determine the medical condition the user is at most risk, and store the user data in a separate CSV or JSON file.
+4.Return Result: After processing the form submission, return the result to the user, showing the medical condition they are at most risk.
+
+
+code :- 
+from flask import Flask, render_template, request, jsonify
+import pandas as pd
+
+app = Flask(__name__)
+
+# Load healthcare data
+healthcare_data = pd.read_csv("Healthcare_Data.csv")  # Update with actual filename and path
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/submit', methods=['POST'])
+def submit():
+    name = request.form['name']
+    gender = request.form['gender']
+    blood_group = request.form['blood_group']
+
